@@ -10,11 +10,33 @@
     </div>
 
     <div fxFlex>
-        <h3>Titulo de ejemplo para Mat-Grid-List</h3>
         <mat-grid-list cols="2" rowHeight="200px">
-            <mat-grid-tile *ngFor="let dish of dishes" [colspan]="1" [rowspan]="1">
-                <img height="200px" src={{dish.image}} alt={{dish.name}}>
+            <mat-grid-tile *ngFor="let dish of dishes">
+              <img height="200px" src={{dish.image}} alt={{dish.name}}>
+              <mat-grid-tile-footer>
+                <h1>{{dish.name | uppercase}}</h1>
+              </mat-grid-tile-footer>
             </mat-grid-tile>
-        </mat-grid-list>
+          </mat-grid-list>
     </div>
+
+    <div fxFlex *ngIf="selectedDish">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{selectedDish.name | uppercase}}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src={{selectedDish.image}} alt={{selectedDish.name}}>
+        <mat-card-content>
+          <p>{{selectedDish.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    
 </div>
