@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
 
   dishes: Dish[] = [];
 
-  selectedDish: Dish = this.dishes[0];
+  // selectedDish: Dish = this.dishes[0];
 
   constructor(private dishService: DishService) {  }
 
@@ -20,8 +20,8 @@ export class MenuComponent implements OnInit {
     this.dishes = this.dishService.getDishes();
   }
 
-  onSelect(dish: Dish) {
-    this.selectedDish = dish;
-  }
+  // onSelect(dish: Dish) {
+  //   this.selectedDish = dish;
+  // }
 
 }
