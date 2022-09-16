@@ -1,7 +1,7 @@
 export class Feedback {
     firstname: string = '';
     lastname: string = '';
-    telnum: number = 0;
+    telnum!: number;
     email: string = '';
     agree: boolean = false;
     contacttype: string = '';
