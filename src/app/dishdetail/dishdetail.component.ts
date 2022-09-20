@@ -6,6 +6,7 @@ import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
 import { ControlConfig, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { baseURL } from '../shared/baseurl';
 
 interface validationMessages {
   author: {
@@ -30,6 +31,8 @@ export class DishdetailComponent implements OnInit {
   prev: string = '';
   next: string = '';
   starts: number = 5;
+
+  BaseURL = baseURL;
 
   commentForm!: FormGroup;
   commentUser!: Comment;

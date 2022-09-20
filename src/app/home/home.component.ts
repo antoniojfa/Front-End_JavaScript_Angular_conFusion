@@ -5,6 +5,7 @@ import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import { Leader } from '../shared/leader';
 import { LeaderService } from '../services/leader.service';
+import { baseURL } from '../shared/baseurl';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,8 @@ export class HomeComponent implements OnInit {
   dish: Dish | undefined;
   promotion: Promotion | undefined;
   leader: Leader | undefined;
+
+  BaseURL = baseURL;
 
   constructor(private dishService: DishService,
       private promotionService: PromotionService,
