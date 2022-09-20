@@ -39,7 +39,42 @@
                 <div matLine>{{ comment.rating }} Stars</div>
                 <div matLine>-- {{ comment.author + " "}}{{ comment.date | date }}</div>
             </mat-list-item>
+            <mat-list-item *ngIf="commentForm.valid">
+                <div matLine>{{ commentForm.value.comment }}</div>
+                <div matLine>{{ commentForm.value.rating }} Stars</div>
+                <div matLine>-- {{ commentForm.value.author }}</div>
+            </mat-list-item>
         </mat-list>
+
+        <div class="form-size">
+            <!-- <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p> -->
+
+            <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                <p>
+                    <mat-form-field class="full-width" fxFlex>
+                        <input matInput formControlName="author" placeholder="Name" type="text" required>
+                        <mat-error *ngIf="formErrors.author">
+                            {{ formErrors.author }}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-slider aria-label="rating"
+                        min="1" max="5" step="1" value="5" thumbLabel tickInterval="1" formControlName="rating">
+                    </mat-slider>
+                </p>
+                <p>
+                    <mat-form-field class="full-width" fxFlex>
+                        <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+                        <mat-error *ngIf="formErrors.comment">
+                            {{ formErrors.comment }}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <button type="submit" mat-button class="background-primary text-floral-white"
+                    [disabled]="commentForm.invalid">Submit</button>
+            </form>
+        </div>
     </div>
 
     <div fxFlex [hidden]="dish">
