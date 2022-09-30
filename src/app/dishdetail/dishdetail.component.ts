@@ -27,6 +27,7 @@ interface validationMessages {
 export class DishdetailComponent implements OnInit {
 
   dish: Dish | undefined;
+  dishcopy!: Dish;
   errMess: string = '';
   dishIds: string[] | any;
   prev: string = '';
@@ -68,7 +69,7 @@ export class DishdetailComponent implements OnInit {
       .subscribe((dishIds) => this.dishIds = dishIds);
     this.route.params
       .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
         errmess => this.errMess = <any>errmess );
   }
 
@@ -119,7 +120,14 @@ export class DishdetailComponent implements OnInit {
     this.commentUser = this.commentForm.value;
     const d = new Date();
     this.commentUser.date = d.toISOString();
-    this.dish?.comments.push(this.commentUser);
+    this.dishcopy.comments.push(this.commentUser);
+    this.dishService.putDish(this.dishcopy)
+      .subscribe(dish => {
+        this.dish = dish; this.dishcopy = dish;
+      },
+      errmess => {
+        this.dish = undefined; this.errMess = <any>errmess
+      });
     console.log(this.commentUser);
     this.commentForm.reset({
       author: '',
