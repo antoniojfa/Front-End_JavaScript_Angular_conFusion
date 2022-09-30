@@ -15,6 +15,7 @@ import { baseURL } from '../shared/baseurl';
 export class HomeComponent implements OnInit {
 
   dish: Dish | undefined;
+  dishErrMess: string = '';
   promotion: Promotion | undefined;
   leader: Leader | undefined;
 
@@ -26,7 +27,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.dishService.getFeaturedDish()
-      .subscribe(dish => this.dish = dish);
+      .subscribe(dish => this.dish = dish,
+        errmess => this.dishErrMess = <any>errmess );
     this.promotionService.getFeaturedPromotion()
       .subscribe(promotion => this.promotion = promotion);
     this.leaderService.getFeaturedLeader()
